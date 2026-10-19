@@ -6,12 +6,11 @@ Módulos
 01. Navegación por pestañas (hash routing)
 02. Barra de pestañas fija y progreso de lectura
 03. Animación de aparición (IntersectionObserver)
-04. Contadores numéricos de KPI
-05. Medidores de la matriz de pagos
-06. Journey del cliente (render desde datos del PPT)
-07. Cronograma Gantt (render desde datos del PPT)
-08. Masthead: fecha de consulta e impresión
-09. Botón volver arriba
+04. Medidores de la matriz de pagos
+05. Journey del cliente (render desde datos del PPT)
+06. Cronograma Gantt (render desde datos del PPT)
+07. Masthead: fecha de consulta e impresión
+08. Botón volver arriba
 ============================================================= */
 (function () {
 'use strict';
@@ -135,32 +134,7 @@ if (el.getBoundingClientRect().top < limit) el.classList.add('is-in');
 }
 
 /* ===========================================================
-04. CONTADORES DE KPI
-=========================================================== */
-function animateCount(el) {
-var target = parseFloat(el.dataset.count);
-var decimals = parseInt(el.dataset.decimals || '0', 10);
-if (isNaN(target) || reduceMotion) return;
-var start = null, dur = 1100;
-function step(ts) {
-if (start === null) start = ts;
-var p = Math.min((ts - start) / dur, 1);
-var eased = 1 - Math.pow(1 - p, 3);
-var val = target * eased;
-el.textContent = val.toLocaleString('es-MX', {
-minimumFractionDigits: decimals, maximumFractionDigits: decimals
-});
-if (p < 1) requestAnimationFrame(step);
-}
-requestAnimationFrame(step);
-}
-
-function runCounters() {
-document.querySelectorAll('#tablero [data-count]').forEach(animateCount);
-}
-
-/* ===========================================================
-05. MEDIDORES DE LA MATRIZ DE PAGOS
+04. MEDIDORES DE LA MATRIZ DE PAGOS
 =========================================================== */
 function runMeters() {
 document.querySelectorAll('#propuesta .meter span').forEach(function (bar) {
@@ -175,7 +149,7 @@ setTimeout(function () { bar.style.width = w; }, 120);
 }
 
 /* ===========================================================
-06. JOURNEY DEL CLIENTE (Fuente: Slide 5)
+05. JOURNEY DEL CLIENTE (Fuente: Slide 5)
 =========================================================== */
 var JOURNEY = [
 { icon: 'i-phone', quote: '“Se me acabó la pensión antes de fin de mes.”', title: 'Tiene una necesidad',
@@ -211,7 +185,7 @@ return '' +
 }
 
 /* ===========================================================
-07. CRONOGRAMA GANTT (Fuente: Slide 10)
+06. CRONOGRAMA GANTT (Fuente: Slide 10)
 -----------------------------------------------------------
 Eje: 14 columnas → 2026 Q4 | 2027 Q1-Q4 | 2028 Q1-Q4 |
 2029 Q1-Q4 | 2030–31
@@ -360,7 +334,7 @@ if (host) setTimeout(function () { host.classList.add('is-drawn'); }, 120);
 }
 
 /* ===========================================================
-08. MASTHEAD: FECHA DE CONSULTA E IMPRESIÓN
+07. MASTHEAD: FECHA DE CONSULTA E IMPRESIÓN
 =========================================================== */
 function initMasthead() {
 var fecha = document.getElementById('fechaConsulta');
@@ -378,7 +352,7 @@ if (imprimir) imprimir.addEventListener('click', function () { window.print(); }
 }
 
 /* ===========================================================
-09. VOLVER ARRIBA
+08. VOLVER ARRIBA
 =========================================================== */
 if (toTop) {
 toTop.addEventListener('click', function () {
@@ -399,7 +373,6 @@ activate(valid ? initial : 'tablero', false);
 
 revealTab(document.querySelector('.tab.is-active'));
 scanReveals();
-runCounters();
 onScroll();
 }
 
