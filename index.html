@@ -48,32 +48,44 @@ ICONOS · sprite SVG en línea (sin dependencias externas)
 </svg>
 
 <!-- ============================================================
-ENCABEZADO + NAVEGACIÓN POR PESTAÑAS
+MASTHEAD INSTITUCIONAL + NAVEGACIÓN POR PESTAÑAS
 ============================================================ -->
-<header class="site-header" id="siteHeader">
-<div class="shell header-inner">
-<a class="brand" href="#tablero">
-<span class="brand-mark" aria-hidden="true">CL</span>
-<span class="brand-text">
-<strong>Cash Loans</strong>
-<small>Grupo Consupago · Banca Minorista</small>
-</span>
-</a>
+<div class="topbar" aria-hidden="true"></div>
 
+<header class="masthead" id="siteHeader">
+<div class="shell masthead-inner">
+<div class="masthead-id">
+<p class="org">
+<svg class="org-mark" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.6"/>
+<circle cx="17" cy="7" r="3.4" fill="var(--naranja-legado)"/>
+</svg>
+Grupo Consupago
+</p>
+<h1 class="masthead-title">Cash Loans</h1>
+</div>
+
+<div class="masthead-meta">
+<p class="meta-line">Consulta del <strong id="fechaConsulta">&mdash;</strong></p>
+<button class="btn-ghost" id="btnPrint" type="button">Imprimir vista</button>
+</div>
+</div>
+
+</header>
+
+<!-- La barra de pestañas vive fuera del masthead para poder quedar
+fija al desplazar; visualmente continúa la misma banda azul. -->
+<div class="tabbar">
+<div class="shell">
 <nav class="tabs" id="tabNav" aria-label="Secciones del portal">
-<button class="tab is-active" role="tab" aria-selected="true" aria-controls="tablero" data-tab="tablero">
-<svg class="tab-ico" aria-hidden="true"><use href="#i-dashboard"/></svg><span>Tablero</span></button>
-<button class="tab" role="tab" aria-selected="false" aria-controls="propuesta" data-tab="propuesta">
-<svg class="tab-ico" aria-hidden="true"><use href="#i-value"/></svg><span>Propuesta de Valor</span></button>
-<button class="tab" role="tab" aria-selected="false" aria-controls="actividades" data-tab="actividades">
-<svg class="tab-ico" aria-hidden="true"><use href="#i-tasks"/></svg><span>Actividades</span></button>
-<button class="tab" role="tab" aria-selected="false" aria-controls="timeline" data-tab="timeline">
-<svg class="tab-ico" aria-hidden="true"><use href="#i-timeline"/></svg><span>Timeline</span></button>
-<span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
+<button class="tab is-active" role="tab" aria-selected="true" aria-controls="tablero" data-tab="tablero">Tablero</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="propuesta" data-tab="propuesta">Propuesta de Valor</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="actividades" data-tab="actividades">Actividades</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="timeline" data-tab="timeline">Timeline</button>
 </nav>
 </div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-</header>
+</div>
 
 <main id="main">
 
@@ -86,7 +98,7 @@ PESTAÑA 1 · TABLERO (Fuente: Slides 1, 2, 3 y 4)
 <div class="hero">
 <div class="shell hero-inner">
 <p class="eyebrow">Tablero ejecutivo · Revisión de Dirección</p>
-<h1>Cash&nbsp;Loans</h1>
+<h2 class="hero-title">Cash&nbsp;Loans</h2>
 <p class="hero-lead">
 Sabemos prestar al pensionado, el mercado ya demostró la demanda, y el CAN y Bankaya
 nos dan con qué atender a la mitad que hoy rechazamos.
@@ -179,7 +191,6 @@ Se implementará con Bankaya o se desarrollará de manera interna.
 <!-- RESUMEN EJECUTIVO + OBJETIVO --------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">01</span>
 <h2>Resumen ejecutivo</h2>
 <p>Por qué existe el proyecto, qué persigue y hasta dónde llega.</p>
 </div>
@@ -212,26 +223,22 @@ Gana quien la rota, no quien la amarra.</p>
 <!-- ALCANCE ------------------------------------------------ -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">02</span>
 <h2>Alcance</h2>
 <p>Tres productos para la mitad que hoy no atendemos, dentro de Productos Bancarios · Domiciliado / Cash loans.</p>
 </div>
 
 <div class="scope-grid">
 <article class="scope-card reveal">
-<p class="scope-rank">01</p>
 <h3>Cash Loan Exprés</h3>
 <p class="scope-role">Puerta de entrada: sin portar la pensión</p>
 <p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba abr 2027</p>
 </article>
 <article class="scope-card reveal">
-<p class="scope-rank">02</p>
 <h3>Anticipo de Pensión</h3>
 <p class="scope-role">Atrae la portabilidad de la pensión</p>
 <p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba oct 2027</p>
 </article>
 <article class="scope-card reveal">
-<p class="scope-rank">03</p>
 <h3>Cashloan</h3>
 <p class="scope-role">Monto mayor: concentra la rentabilidad</p>
 <p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba feb 2028</p>
@@ -242,7 +249,6 @@ Gana quien la rota, no quien la amarra.</p>
 <!-- COMPONENTES DE LA SOLUCIÓN (Marco estratégico, Slide 1) - -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">03</span>
 <h2>Principales componentes de la solución</h2>
 <p>Marco Estratégico — Modelo Objetivo. El recuadro resaltado delimita el ámbito de Cash Loans.</p>
 </div>
@@ -325,7 +331,6 @@ Gana quien la rota, no quien la amarra.</p>
 <!-- CONTEXTO DE MERCADO (Slide 2) -------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">04</span>
 <h2>Contexto y condiciones del Mercado</h2>
 <p>Siete hechos que, juntos, abren un mercado que hoy no atendemos.</p>
 </div>
@@ -358,7 +363,6 @@ Gana quien la rota, no quien la amarra.</p>
 <!-- LA OPORTUNIDAD Y LA INTENCIÓN (Slide 4) ---------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">05</span>
 <h2>La oportunidad y la intención</h2>
 <p>El tamaño del segmento desatendido y la lógica económica que ordena la oferta.</p>
 </div>
@@ -435,8 +439,7 @@ PESTAÑA 2 · PROPUESTA DE VALOR (Fuente: Slides 5-9)
 
 <div class="page-head">
 <div class="shell">
-<p class="eyebrow">Pestaña 02</p>
-<h1>Propuesta de Valor</h1>
+<h2 class="page-title">Propuesta de Valor</h2>
 <p class="page-lead">Entra por una necesidad urgente y, crédito a crédito, encuentra en nosotros su banco.</p>
 </div>
 </div>
@@ -444,7 +447,6 @@ PESTAÑA 2 · PROPUESTA DE VALOR (Fuente: Slides 5-9)
 <!-- JOURNEY (Slide 5) -------------------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">01</span>
 <h2>El journey del cliente</h2>
 <p>Seis momentos, de la necesidad urgente al crédito con descuento vía nómina.</p>
 </div>
@@ -479,7 +481,6 @@ hasta llegar al crédito con descuento vía nómina.</p>
 <!-- COMPARATIVO DE PRODUCTOS (Slides 6 y 8) ---------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">02</span>
 <h2>Diferenciadores frente al mercado</h2>
 <p>Precio y plazo contra los competidores más cercanos de cada producto.</p>
 </div>
@@ -544,7 +545,6 @@ hasta llegar al crédito con descuento vía nómina.</p>
 <!-- CASO DE NEGOCIO · FASE 1 (Slide 7) --------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">03</span>
 <h2>Fase 1 · Cashloan Exprés</h2>
 <p class="quote-lead">“Poquito, ya, sin tocar tu pensión.”</p>
 </div>
@@ -618,7 +618,6 @@ ni el plazo. Presupuesto mensual = 30% de la PMG 2026. Cifras estimadas, sujetas
 <!-- CASO DE NEGOCIO · FASE 2 (Slide 9) --------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">04</span>
 <h2>Fase 2 · Cashloan</h2>
 <p>Donde esperamos que viva la mayor rentabilidad del portafolio.</p>
 </div>
@@ -697,8 +696,7 @@ PESTAÑA 3 · ACTIVIDADES (Fuente: Slides 12, 13 y 14)
 
 <div class="page-head">
 <div class="shell">
-<p class="eyebrow">Pestaña 03</p>
-<h1>Actividades</h1>
+<h2 class="page-title">Actividades</h2>
 <p class="page-lead">Validación del modelo, aprobación y preparación de la ejecución.</p>
 </div>
 </div>
@@ -706,7 +704,6 @@ PESTAÑA 3 · ACTIVIDADES (Fuente: Slides 12, 13 y 14)
 <!-- WORKFLOW (Slide 12) ------------------------------------ -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">01</span>
 <h2>Cash loans: siguientes pasos</h2>
 <p>Flujo de trabajo en tres bloques, con la aprobación como punto de control.</p>
 </div>
@@ -750,7 +747,6 @@ PESTAÑA 3 · ACTIVIDADES (Fuente: Slides 12, 13 y 14)
 <!-- ALIANZA (Slide 13) ------------------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">02</span>
 <h2>Cash Loans · Alianza Consubanco – Bankaya</h2>
 <p>Qué vimos, dónde estamos y qué sigue en la relación con el socio.</p>
 </div>
@@ -796,7 +792,6 @@ PESTAÑA 3 · ACTIVIDADES (Fuente: Slides 12, 13 y 14)
 <!-- SIGUIENTES PASOS (Slide 14) ---------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">03</span>
 <h2>Siguientes pasos</h2>
 <p>Entregables inmediatos y sus responsables.</p>
 </div>
@@ -822,8 +817,7 @@ PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
 
 <div class="page-head">
 <div class="shell">
-<p class="eyebrow">Pestaña 04</p>
-<h1>Timeline</h1>
+<h2 class="page-title">Timeline</h2>
 <p class="page-lead">T0 noviembre 2026 · cada producto arranca su prueba cuando el anterior entra a lanzamiento gradual.</p>
 </div>
 </div>
@@ -831,7 +825,6 @@ PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
 <!-- GANTT (Slide 10) --------------------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">01</span>
 <h2>Cronograma de etapas por producto</h2>
 <p>Fases, hitos y dependencias entre productos.</p>
 </div>
@@ -853,7 +846,6 @@ PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
 <!-- FASES (Slide 10, tarjetas inferiores) ------------------ -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">02</span>
 <h2>Fases y criterios de avance</h2>
 <p>Qué entrega cada fase y con qué evidencia avanza a la siguiente.</p>
 </div>
@@ -885,7 +877,6 @@ PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
 <!-- SUPUESTOS (Slide 11) ----------------------------------- -->
 <div class="shell">
 <div class="section-head reveal">
-<span class="section-kicker">03</span>
 <h2>Supuestos del proyecto</h2>
 <p>Base de planeación — a validar y cerrar en las sesiones de trabajo antes de firmar.</p>
 </div>
@@ -908,8 +899,7 @@ PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
 
 <footer class="site-footer">
 <div class="shell footer-inner">
-<p><strong>Cash Loans</strong> · Portal ejecutivo</p>
-<p class="footer-note">Contenido elaborado exclusivamente a partir de la presentación del proyecto Cash Loans.</p>
+<p><strong>Grupo Consupago</strong> · Banca Minorista</p>
 </div>
 </footer>
 
