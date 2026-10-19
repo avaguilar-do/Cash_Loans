@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portal ejecutivo del proyecto Cash Loans — Grupo Consupago / Consubanco. Tablero, propuesta de valor, actividades y cronograma.">
+<title>Cash Loans · Portal Ejecutivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- Las animaciones de entrada sólo se activan si hay JavaScript: sin él,
+el contenido se muestra completo (fail-safe para revisión ejecutiva). -->
+<script>document.documentElement.className += ' js-anim';</script>
+</head>
+<body>
+
+<!-- ============================================================
+ICONOS · sprite SVG en línea (sin dependencias externas)
+============================================================ -->
+<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-dashboard" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"/></symbol>
+<symbol id="i-value" viewBox="0 0 24 24"><path d="M12 2 3 7v6c0 5 3.8 8.4 9 9 5.2-.6 9-4 9-9V7l-9-5Zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6Z"/></symbol>
+<symbol id="i-tasks" viewBox="0 0 24 24"><path d="M9 3h6a2 2 0 0 1 2 2h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2Zm0 2v2h6V5H9Zm-1.3 12.3L5 14.6 6.4 13l1.3 1.3L11.6 11 13 12.4l-5.3 4.9Z"/></symbol>
+<symbol id="i-timeline" viewBox="0 0 24 24"><path d="M3 5h12v3H3V5Zm3 5.5h13v3H6v-3ZM9 16h12v3H9v-3Z"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 4v12h10V6H7Zm4 13h2v1h-2v-1Z"/></symbol>
+<symbol id="i-user-check" viewBox="0 0 24 24"><path d="M10 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4 0-8 2-8 4.5V21h11l-1.6-2.5L10 14Zm8.3.6 1.4 1.4-4.2 4.2-2.8-2.8 1.4-1.4 1.4 1.4 2.8-2.8Z"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 5h14a2 2 0 0 1 2 2v2h-6a3 3 0 0 0 0 6h6v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm10 6h7v2h-7a1 1 0 0 1 0-2Z"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><path d="M7 2v2h10V2h2v2h2v18H3V4h2V2h2Zm12 8H5v10h14V10Zm-8.5 2 1.4 1.4-3.2 3.2L7 14.9l1.1-1.1.6.6 1.8-2.4Z"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><path d="M12 5.2A3 3 0 1 1 16.8 8H21v4h-2v9H5v-9H3V8h4.2A3 3 0 1 1 12 5.2ZM11 12H7v7h4v-7Zm2 0v7h4v-7h-4Z"/></symbol>
+<symbol id="i-handshake" viewBox="0 0 24 24"><path d="M12 5 9 7.5 5 6 2 10l4 4 1.5-1.5L11 16l2-1.5 2 2 2-2 3-3-3-5-5 1-1-1.5Z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v7c0 4.6 3.4 8.9 8 10 4.6-1.1 8-5.4 8-10V5l-8-3Z"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 2.3L5.5 8 12 11.7 18.5 8 12 4.3ZM5 9.7v6.1l6 3.3v-6.1l-6-3.3Zm14 0-6 3.3v6.1l6-3.3V9.7Z"/></symbol>
+<symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19l-1.4-1.4L17.6 3.6 19 5ZM7 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm10 10a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><path d="M3 4h18v6H3V4Zm0 10h18v6H3v-6Zm3-7h2v2H6V7Zm0 10h2v2H6v-2Z"/></symbol>
+<symbol id="i-legal" viewBox="0 0 24 24"><path d="M4 3h16v18H4V3Zm2 2v14h12V5H6Zm2 2h8v2H8V7Zm0 4h8v2H8v-2Zm0 4h5v2H8v-2Z"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 2.5L17.5 8H14V4.5ZM8 12h8v2H8v-2Zm0 4h8v2H8v-2Z"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><path d="M6 3a3 3 0 0 1 3 3c0 2-3 5-3 5S3 8 3 6a3 3 0 0 1 3-3Zm12 10a3 3 0 0 1 3 3c0 2-3 5-3 5s-3-3-3-5a3 3 0 0 1 3-3ZM7 8.5h3.5a4.5 4.5 0 0 1 0 9H9v-2h1.5a2.5 2.5 0 0 0 0-5H7v-2Z"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h3.5l2-6 4 13 2.5-7H21v2h-4.6l-3.4 9.5L9 10.8 7.9 14H3v-2Z"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 2 1 21h22L12 2Zm1 14h-2v2h2v-2Zm0-7h-2v5h2V9Z"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 14.4-4.2-4.2 1.4-1.4 2.8 2.8 5.8-5.8 1.4 1.4-7.2 7.2Z"/></symbol>
+<symbol id="i-decision" viewBox="0 0 24 24"><path d="M12 2 2 12l10 10 10-10L12 2Zm0 4.2L17.8 12 12 17.8 6.2 12 12 6.2ZM11 8h2v5h-2V8Zm0 6h2v2h-2v-2Z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/></symbol>
+<symbol id="i-scope" viewBox="0 0 24 24"><path d="M3 3h7v2H5v5H3V3Zm11 0h7v7h-2V5h-5V3ZM3 14h2v5h5v2H3v-7Zm16 0h2v7h-7v-2h5v-5ZM8 8h8v8H8V8Z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5.5-10 5.5L2 7.5 12 2Zm7.6 8.6L22 12l-10 5.5L2 12l2.4-1.4L12 14.8l7.6-4.2Zm0 4.5L22 16.5 12 22 2 16.5l2.4-1.4L12 19.3l7.6-4.2Z"/></symbol>
+<symbol id="i-growth" viewBox="0 0 24 24"><path d="M3 20h18v2H3v-2Zm2-5h3v4H5v-4Zm5-4h3v8h-3v-8Zm5-5h3v13h-3V6Z"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 2h2v20H5V2Zm3 1h12l-2.5 4L20 11H8V3Z"/></symbol>
+</svg>
+
+<!-- ============================================================
+ENCABEZADO + NAVEGACIÓN POR PESTAÑAS
+============================================================ -->
+<header class="site-header" id="siteHeader">
+<div class="shell header-inner">
+<a class="brand" href="#tablero">
+<span class="brand-mark" aria-hidden="true">CL</span>
+<span class="brand-text">
+<strong>Cash Loans</strong>
+<small>Grupo Consupago · Banca Minorista</small>
+</span>
+</a>
+
+<nav class="tabs" id="tabNav" aria-label="Secciones del portal">
+<button class="tab is-active" role="tab" aria-selected="true" aria-controls="tablero" data-tab="tablero">
+<svg class="tab-ico" aria-hidden="true"><use href="#i-dashboard"/></svg><span>Tablero</span></button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="propuesta" data-tab="propuesta">
+<svg class="tab-ico" aria-hidden="true"><use href="#i-value"/></svg><span>Propuesta de Valor</span></button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="actividades" data-tab="actividades">
+<svg class="tab-ico" aria-hidden="true"><use href="#i-tasks"/></svg><span>Actividades</span></button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="timeline" data-tab="timeline">
+<svg class="tab-ico" aria-hidden="true"><use href="#i-timeline"/></svg><span>Timeline</span></button>
+<span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
+</nav>
+</div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+PESTAÑA 1 · TABLERO (Fuente: Slides 1, 2, 3 y 4)
+============================================================ -->
+<section class="panel is-active" id="tablero" role="tabpanel" aria-labelledby="tablero">
+
+<!-- HERO ------------------------------------------------- -->
+<div class="hero">
+<div class="shell hero-inner">
+<p class="eyebrow">Tablero ejecutivo · Revisión de Dirección</p>
+<h1>Cash&nbsp;Loans</h1>
+<p class="hero-lead">
+Sabemos prestar al pensionado, el mercado ya demostró la demanda, y el CAN y Bankaya
+nos dan con qué atender a la mitad que hoy rechazamos.
+</p>
+<div class="hero-chips">
+<span class="chip chip-solid">Banca Minorista · Personas Físicas</span>
+<span class="chip">Productos Bancarios</span>
+<span class="chip">Domiciliado / Cash loans</span>
+</div>
+</div>
+</div>
+
+<!-- KPIs -------------------------------------------------- -->
+<div class="shell">
+<div class="kpi-grid reveal">
+<article class="kpi kpi-accent">
+<p class="kpi-label">La oportunidad</p>
+<p class="kpi-value" data-count="2.75" data-decimals="2">2.75</p>
+<p class="kpi-unit">millones</p>
+<p class="kpi-note">de pensionados IMSS que hoy rechazamos — el 51.3% de 5.4&nbsp;M</p>
+</article>
+<article class="kpi">
+<p class="kpi-label">La consecuencia</p>
+<p class="kpi-value" data-count="3">3</p>
+<p class="kpi-unit">productos</p>
+<p class="kpi-note">para la mitad que hoy no atendemos</p>
+</article>
+<article class="kpi">
+<p class="kpi-label">Capacidad mensual</p>
+<p class="kpi-value"><span class="kpi-pre">$</span><span data-count="3190">3,190</span></p>
+<p class="kpi-unit">del pensionado</p>
+<p class="kpi-note">30% sobre el ingreso · recomendación CONDUSEF</p>
+</article>
+<article class="kpi">
+<p class="kpi-label">Mercado</p>
+<p class="kpi-value" data-count="33.5" data-decimals="1">33.5</p>
+<p class="kpi-unit">M con ingreso recurrente</p>
+<p class="kpi-note">26.9&nbsp;M con empleo formal y 6.5 a 7.0&nbsp;M pensionados contributivos</p>
+</article>
+<article class="kpi">
+<p class="kpi-label">Fortaleza</p>
+<p class="kpi-value kpi-value-sm">4º banco</p>
+<p class="kpi-unit">del país en préstamos personales</p>
+<p class="kpi-note">Años operando descuento vía nómina</p>
+</article>
+</div>
+</div>
+
+<!-- DECISIONES Y RIESGOS ---------------------------------- -->
+<div class="shell">
+<div class="status-grid">
+
+<article class="decision-card reveal" id="decisiones">
+<header class="decision-head">
+<svg class="decision-ico" aria-hidden="true"><use href="#i-decision"/></svg>
+<div>
+<p class="eyebrow eyebrow-light">Requiere definición</p>
+<h2>Decisiones Pendientes de Dirección</h2>
+</div>
+<span class="pulse-dot" aria-hidden="true"></span>
+</header>
+<blockquote class="decision-statement">
+Se implementará con Bankaya o se desarrollará de manera interna.
+</blockquote>
+<p class="decision-foot">Decisión abierta · pendiente de resolución por Dirección Ejecutiva</p>
+</article>
+
+<article class="risk-card reveal" id="riesgos">
+<header class="risk-head">
+<div>
+<p class="eyebrow">Monitoreo</p>
+<h2>Alertas y Riesgos</h2>
+</div>
+<div class="semaphore" role="img" aria-label="Semáforo en verde: sin riesgos detectados">
+<span class="light light-red"></span>
+<span class="light light-amber"></span>
+<span class="light light-green is-on"></span>
+</div>
+</header>
+<div class="risk-body">
+<svg class="risk-ico" aria-hidden="true"><use href="#i-check-circle"/></svg>
+<p class="risk-statement">Sin riesgos detectados.</p>
+</div>
+<p class="risk-foot">Estatus general del proyecto · verde</p>
+</article>
+
+</div>
+</div>
+
+<!-- RESUMEN EJECUTIVO + OBJETIVO --------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">01</span>
+<h2>Resumen ejecutivo</h2>
+<p>Por qué existe el proyecto, qué persigue y hasta dónde llega.</p>
+</div>
+
+<div class="two-col">
+<article class="card card-dark reveal">
+<div class="card-ico-row"><svg aria-hidden="true"><use href="#i-target"/></svg><h3>Objetivo del proyecto</h3></div>
+<p class="lede-dark">
+La futura Banca Minorista debe crecer por <strong>clientes vinculados y rentables</strong>,
+no únicamente por nuevas operaciones.
+</p>
+<hr class="rule-light">
+<p class="small-dark"><strong>La intención.</strong> Su capacidad de pago es fija.
+Gana quien la rota, no quien la amarra.</p>
+</article>
+
+<article class="card reveal">
+<div class="card-ico-row"><svg aria-hidden="true"><use href="#i-growth"/></svg><h3>La evolución de la banca Minorista con soluciones integrales</h3></div>
+<ol class="numbered-list">
+<li><span class="num">01</span><p>Mantener el crecimiento rentable de DxN y la calidad del portafolio.</p></li>
+<li><span class="num">02</span><p>Vincular crédito, cuenta, aplicación y recepción de nómina o pensión.</p></li>
+<li><span class="num">03</span><p>Gestionar la venta cruzada y la retención a lo largo del ciclo de vida.</p></li>
+<li><span class="num">04</span><p>Migrar gradualmente interacciones a canales de menor costo.</p></li>
+<li><span class="num">05</span><p>Ampliar la oferta de productos y servicios.</p></li>
+</ol>
+</article>
+</div>
+</div>
+
+<!-- ALCANCE ------------------------------------------------ -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">02</span>
+<h2>Alcance</h2>
+<p>Tres productos para la mitad que hoy no atendemos, dentro de Productos Bancarios · Domiciliado / Cash loans.</p>
+</div>
+
+<div class="scope-grid">
+<article class="scope-card reveal">
+<p class="scope-rank">01</p>
+<h3>Cash Loan Exprés</h3>
+<p class="scope-role">Puerta de entrada: sin portar la pensión</p>
+<p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba abr 2027</p>
+</article>
+<article class="scope-card reveal">
+<p class="scope-rank">02</p>
+<h3>Anticipo de Pensión</h3>
+<p class="scope-role">Atrae la portabilidad de la pensión</p>
+<p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba oct 2027</p>
+</article>
+<article class="scope-card reveal">
+<p class="scope-rank">03</p>
+<h3>Cashloan</h3>
+<p class="scope-role">Monto mayor: concentra la rentabilidad</p>
+<p class="scope-date"><svg aria-hidden="true"><use href="#i-calendar"/></svg>Prueba feb 2028</p>
+</article>
+</div>
+</div>
+
+<!-- COMPONENTES DE LA SOLUCIÓN (Marco estratégico, Slide 1) - -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">03</span>
+<h2>Principales componentes de la solución</h2>
+<p>Marco Estratégico — Modelo Objetivo. El recuadro resaltado delimita el ámbito de Cash Loans.</p>
+</div>
+
+<div class="org-diagram reveal" role="img" aria-label="Diagrama del modelo objetivo de Grupo Consupago. Cash loans vive en Banca Minorista, Productos Bancarios, línea Domiciliado / Cash loans.">
+<div class="org-top">Grupo Consupago</div>
+
+<div class="org-branches">
+<!-- Banca Minorista (ámbito del proyecto) -->
+<div class="org-branch org-branch-focus">
+<span class="org-focus-tag">Ámbito Cash Loans</span>
+<div class="org-branch-head">Banca Minorista <em>(Personas Físicas)</em></div>
+
+<div class="org-cols">
+<div class="org-col">
+<div class="org-col-head">Productos Bancarios</div>
+<p class="org-col-sub">Productos generadores de ingresos</p>
+<div class="org-items">
+<div class="org-item"><span class="org-item-t">DxN</span><span>DxN</span></div>
+<div class="org-item org-item-hl">
+<span class="org-item-t">Domiciliado / Cash loans</span>
+<span>Cash loans express<br>Anticipo de nómina<br>Cash loan</span>
+</div>
+<div class="org-item"><span class="org-item-t">Captación</span><span>Ahorro<br>Nómina<br>Inversiones</span></div>
+</div>
+</div>
+
+<div class="org-col">
+<div class="org-col-head">Productos No Bancarios</div>
+<p class="org-col-sub">Productos complementarios a la oferta principal</p>
+<div class="org-items">
+<div class="org-item"><span class="org-item-t">Seguros</span><span>Vida</span></div>
+<div class="org-item"><span class="org-item-t">Productos complementarios</span><span>Legal, Jurídica, Nutricional</span></div>
+</div>
+</div>
+</div>
+
+<p class="org-channels">Distribución Interna &nbsp;|&nbsp; Socios de Negocio &nbsp;|&nbsp; Alianzas Estratégicas &nbsp;|&nbsp; Banca Patrimonial</p>
+</div>
+
+<!-- Banca Mayorista (fuera de alcance) -->
+<div class="org-branch org-branch-muted">
+<span class="org-muted-tag">Fuera de alcance</span>
+<div class="org-branch-head">Banca Mayorista <em>(Personas Morales)</em></div>
+<div class="org-cols">
+<div class="org-col">
+<div class="org-col-head org-col-head-muted">Banca Corporativa y de Gobierno</div>
+<div class="org-mini">Banca Corporativa</div>
+<div class="org-mini">Banca de Gobierno</div>
+<p class="org-col-sub">Soluciones financieras para Corporativos y Gobierno</p>
+<div class="org-tags"><span>Crédito</span><span>Captación</span><span>Servicios</span></div>
+<div class="org-mini org-mini-wide">Banco recaudador</div>
+</div>
+<div class="org-col">
+<div class="org-col-head org-col-head-muted">Banca Empresarial</div>
+<div class="org-mini">Empresas</div>
+<div class="org-mini">Pymes</div>
+<p class="org-col-sub">Soluciones financieras a Empresas</p>
+<div class="org-tags"><span>Crédito</span><span>Captación</span><span>Servicios</span></div>
+</div>
+</div>
+<p class="org-channels org-channels-muted">Banca de Gobierno &nbsp;|&nbsp; Banca Comercial &nbsp;|&nbsp; Empresas y Pyme</p>
+</div>
+</div>
+
+<div class="org-bottom">Equipos transversales</div>
+<div class="org-transversal">
+<span>Administración y Finanzas</span>
+<span>Riesgos, Control Interno y Cumplimiento</span>
+<span>Transformación y Tecnológica</span>
+<span>Crecimiento</span>
+<span>Capital Humano</span>
+<span>Estrategia e Innovación</span>
+<span>Jurídico y Asuntos Corporativos</span>
+<span>Operaciones y Servicio al Cliente</span>
+</div>
+</div>
+</div>
+
+<!-- CONTEXTO DE MERCADO (Slide 2) -------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">04</span>
+<h2>Contexto y condiciones del Mercado</h2>
+<p>Siete hechos que, juntos, abren un mercado que hoy no atendemos.</p>
+</div>
+
+<div class="facts-grid">
+<article class="fact reveal"><span class="fact-n">1</span><p class="fact-tag">Fortaleza</p>
+<h3>Líderes en crédito vía nómina</h3>
+<p>4º banco del país en préstamos personales. Años operando descuento vía nómina; pensionados es nuestro mayor mercado y lo conocemos a fondo.</p></article>
+<article class="fact reveal"><span class="fact-n">2</span><p class="fact-tag">Competencia</p>
+<h3>Las SOFOMes ya ofrecen crédito domiciliado</h3>
+<p>Atienden al pensionado con productos que hoy no tenemos, pero sin la ventaja de ser banco y con tasas más altas.</p></article>
+<article class="fact reveal"><span class="fact-n">3</span><p class="fact-tag">Habilitador</p>
+<h3>El CAN reduce el riesgo de cobro</h3>
+<p>Cobro domiciliado a nómina o pensión con un portal tipo SIPRE y reglas de prelación: un esquema que ya operamos.</p></article>
+<article class="fact reveal"><span class="fact-n">4</span><p class="fact-tag">Mercado</p>
+<h3>33.5 M con ingreso recurrente</h3>
+<p>26.9 M con empleo formal y 6.5 a 7.0 M pensionados contributivos; 10.6 a 11.1 M en el segmento prioritario.</p></article>
+<article class="fact reveal fact-hl"><span class="fact-n">5</span><p class="fact-tag">Oportunidad</p>
+<h3>Hoy rechazamos a la mitad</h3>
+<p>De 5.4 M pensionados IMSS en nuestra base, 2.6 M son elegibles a descuento vía nómina; 2.75 M (51%) no tienen oferta.</p></article>
+<article class="fact reveal"><span class="fact-n">6</span><p class="fact-tag">Habilitador</p>
+<h3>Bankaya aporta el know-how</h3>
+<p>Socio comercial con experiencia lanzando productos parecidos a lo que necesita el cliente que hoy queda fuera.</p></article>
+<article class="fact reveal"><span class="fact-n">7</span><p class="fact-tag">Tendencia</p>
+<h3>Ticket chico y plazo corto</h3>
+<p>SOFOMes y Fintech lo demostraron: rota y capitaliza rápido, y abre la oferta a todo el mercado, incluso al elegible.</p></article>
+</div>
+</div>
+
+<!-- LA OPORTUNIDAD Y LA INTENCIÓN (Slide 4) ---------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">05</span>
+<h2>La oportunidad y la intención</h2>
+<p>El tamaño del segmento desatendido y la lógica económica que ordena la oferta.</p>
+</div>
+
+<div class="opp-grid">
+
+<article class="opp-left reveal">
+<p class="eyebrow eyebrow-light">La oportunidad</p>
+<p class="opp-big">2.75</p>
+<p class="opp-big-unit">Millones</p>
+<p class="opp-desc">de pensionados IMSS que hoy rechazamos — el 51.3% de 5.4&nbsp;M</p>
+
+<div class="split-bar" role="img" aria-label="2.6 millones elegibles frente a 2.75 millones fuera de oferta">
+<span class="split-a" style="width:48.6%"></span>
+<span class="split-b" style="width:51.4%"></span>
+</div>
+<div class="split-legend">
+<span class="legend-a">2.6 M elegibles</span>
+<span class="legend-b">2.75 M fuera</span>
+</div>
+
+<hr class="rule-light">
+<p class="small-dark">Con Pensión Mínima Garantizada no existe excedente descontable.
+Sin descuento, no tenemos forma de cobrarles.</p>
+<p class="opp-law">Art. 190, Ley del Seguro Social</p>
+<p class="opp-kicker">Y hoy, al 48.7% que sí atendemos, le ofrecemos un solo producto.</p>
+</article>
+
+<article class="opp-right reveal">
+<p class="eyebrow">La intención</p>
+<h3 class="opp-claim">Su capacidad de pago es fija.<br><span>Gana quien la rota, no quien la amarra.</span></h3>
+
+<div class="flow-chain">
+<div class="flow-node">
+<p class="flow-v">$10,636</p>
+<p class="flow-l">Pensión mínima garantizada · 2026</p>
+</div>
+<svg class="flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h11.2l-3.6-3.6L13 6l6 6-6 6-1.4-1.4 3.6-3.6H4v-2Z"/></svg>
+<div class="flow-node">
+<p class="flow-v">30%</p>
+<p class="flow-l">Recomendación compromiso sobre el ingreso · CONDUSEF</p>
+</div>
+<svg class="flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h11.2l-3.6-3.6L13 6l6 6-6 6-1.4-1.4 3.6-3.6H4v-2Z"/></svg>
+<div class="flow-node flow-node-accent">
+<p class="flow-v">$3,190</p>
+<p class="flow-l">Capacidad mensual del pensionado</p>
+</div>
+</div>
+
+<p class="opp-text">Cuando un competidor coloca un crédito a 60 meses, no le gana al cliente.</p>
+<p class="opp-text opp-text-accent">Lo saca del mercado durante cinco años.</p>
+
+<p class="compare-label">Competidor · 60 meses</p>
+<div class="bar-blocked">capacidad bloqueada &nbsp;·&nbsp; una sola venta &nbsp;·&nbsp; cero datos nuevos</div>
+
+<p class="compare-label compare-label-accent">Propuesta · ciclos cortos</p>
+<div class="cycle-row">
+<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+</div>
+<p class="cycle-note">6 ciclos &nbsp;·&nbsp; 6 datos de comportamiento &nbsp;·&nbsp; 6 decisiones de subir escalón</p>
+
+<p class="footnote">PMG 2026: $10,636.54 mensuales. Tope de 30%: convención de mercado del segmento
+(Préstamo IMSS Tipo B, criterio CONDUSEF).</p>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- ============================================================
+PESTAÑA 2 · PROPUESTA DE VALOR (Fuente: Slides 5-9)
+============================================================ -->
+<section class="panel" id="propuesta" role="tabpanel" aria-labelledby="propuesta" hidden>
+
+<div class="page-head">
+<div class="shell">
+<p class="eyebrow">Pestaña 02</p>
+<h1>Propuesta de Valor</h1>
+<p class="page-lead">Entra por una necesidad urgente y, crédito a crédito, encuentra en nosotros su banco.</p>
+</div>
+</div>
+
+<!-- JOURNEY (Slide 5) -------------------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">01</span>
+<h2>El journey del cliente</h2>
+<p>Seis momentos, de la necesidad urgente al crédito con descuento vía nómina.</p>
+</div>
+
+<div class="journey" id="journey"><!-- render: script.js --></div>
+
+<div class="relation reveal">
+<div class="relation-head">
+<p class="eyebrow">Cómo crece la relación</p>
+<p class="relation-note">Le llevamos la mejor oferta al dispersar, mientras paga, al estar por terminar y al liquidar</p>
+</div>
+<div class="relation-grid">
+<p class="relation-rowlabel">Producto</p>
+<div class="rel-cell rel-blue-l" style="--span:3">Cash Loan Exprés · ticket chico, sin portar la pensión</div>
+<div class="rel-cell rel-blue-m" style="--span:1">Anticipo · Cashloan</div>
+<div class="rel-cell rel-blue-d" style="--span:1">Créditos mayores · nómina</div>
+
+<p class="relation-rowlabel">Cobro</p>
+<div class="rel-cell rel-pale" style="--span:3">Pago voluntario</div>
+<div class="rel-cell rel-blue-m" style="--span:1">Cargo a cuenta CSB → CAN</div>
+<div class="rel-cell rel-blue-d" style="--span:1">Descuento vía nómina</div>
+</div>
+<div class="relation-progress">
+<span>más conocimiento del cliente</span><span>más monto</span>
+<span>menor riesgo de cobro</span><span>mejores condiciones</span>
+</div>
+<p class="relation-objective"><strong>Objetivo:</strong> un producto para cada necesidad en cada momento del cliente,
+hasta llegar al crédito con descuento vía nómina.</p>
+</div>
+</div>
+
+<!-- COMPARATIVO DE PRODUCTOS (Slides 6 y 8) ---------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">02</span>
+<h2>Diferenciadores frente al mercado</h2>
+<p>Precio y plazo contra los competidores más cercanos de cada producto.</p>
+</div>
+
+<div class="two-col">
+<!-- Cash Loan Exprés · Slide 6 -->
+<article class="prod-card reveal">
+<header class="prod-head">
+<p class="eyebrow eyebrow-light">Puerta de entrada</p>
+<h3>Cash Loan Exprés</h3>
+</header>
+<p class="prod-sub">Crédito chico desde el celular, sin portar la pensión.</p>
+<dl class="spec-list">
+<div><dt>Monto</dt><dd>$500 – $6,000</dd></div>
+<div><dt>Plazo</dt><dd>1 a 3 meses</dd></div>
+<div><dt>Tasa anual</dt><dd class="hl">127% · sin comisión</dd></div>
+<div><dt>Cobro</dt><dd>Pago voluntario</dd></div>
+</dl>
+<p class="table-label">Competidores más cercanos</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th scope="col">Institución</th><th scope="col">Monto</th><th scope="col">Plazo</th><th scope="col" class="ta-r">Tasa anual</th></tr></thead>
+<tbody>
+<tr><th scope="row">Bankaya</th><td>$500 – $7,500</td><td>2 a 8 semanas</td><td class="ta-r b">255%</td></tr>
+<tr><th scope="row">Stori</th><td>$500 – $23,000</td><td>2 a 12 meses</td><td class="ta-r b">153%</td></tr>
+<tr><th scope="row">DiDi Finanzas</th><td>$500 – $46,800</td><td>1 a 3 meses</td><td class="ta-r b">300%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="pull-quote"><strong>127% anual:</strong> la mitad que Bankaya y debajo de Stori y DiDi.</p>
+</article>
+
+<!-- Cashloan · Slide 8 -->
+<article class="prod-card reveal">
+<header class="prod-head">
+<p class="eyebrow eyebrow-light">Rentabilidad</p>
+<h3>Cashloan</h3>
+</header>
+<p class="prod-sub">Monto mayor con pagos fijos que termina en meses.</p>
+<dl class="spec-list">
+<div><dt>Monto</dt><dd>$5,000 – $40,000</dd></div>
+<div><dt>Plazo</dt><dd>6 a 18 meses</dd></div>
+<div><dt>Tasa anual</dt><dd class="hl">69% · sin comisión</dd></div>
+<div><dt>Cobro</dt><dd>Cargo a cuenta CSB</dd></div>
+</dl>
+<p class="table-label">Competidores más cercanos</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th scope="col">Institución</th><th scope="col">Monto</th><th scope="col">Plazo</th><th scope="col" class="ta-r">Tasa anual</th></tr></thead>
+<tbody>
+<tr><th scope="row">Dimex</th><td>$2,000 – $200,000</td><td>6 a 48 meses</td><td class="ta-r b">83.8%</td></tr>
+<tr><th scope="row">BanCoppel</th><td>$6,700 – $53,900</td><td>12 a 24 meses</td><td class="ta-r b">76.0%</td></tr>
+<tr><th scope="row">Banco Azteca</th><td>$2,000 – $200,000</td><td>1 a 36 meses</td><td class="ta-r b">49.6%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="pull-quote"><strong>69% anual:</strong> el promedio de los tres, con plazos más cortos.</p>
+</article>
+</div>
+</div>
+
+<!-- CASO DE NEGOCIO · FASE 1 (Slide 7) --------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">03</span>
+<h2>Fase 1 · Cashloan Exprés</h2>
+<p class="quote-lead">“Poquito, ya, sin tocar tu pensión.”</p>
+</div>
+
+<div class="case">
+<aside class="case-aside reveal">
+<div class="case-what">
+<p class="eyebrow eyebrow-light">Qué es</p>
+<p>Un crédito de monto chico que se solicita y se dispersa en minutos desde el celular.
+No toca su pensión: solo pide una cuenta CSB.</p>
+<p>Se liquida entre uno y tres meses. Sin comisión de apertura: lo único que paga es el interés,
+y lo ve en pesos.</p>
+<p class="case-solve"><span>Resuelve</span> JTBD 1 y 2 — se le acabó la pensión antes de terminar el mes,
+o le cayó un imprevisto de salud.</p>
+</div>
+
+<p class="case-limits-label">Por qué estos límites</p>
+<div class="limit limit-floor">
+<p class="limit-tag">Piso $500</p>
+<p>Es casi el piso del mercado: Klar, Stori, Albo, Baubap y Finsus arrancan ahí.
+Bajar de $1,000 nos mete al ticket donde vive la necesidad real.</p>
+</div>
+<div class="limit limit-cap">
+<p class="limit-tag">Techo $6,000</p>
+<p>No lo ponen las referencias del mercado, que llegan a $80,000. Lo pone la capacidad del pensionado:
+$3,190 al mes es lo que puede comprometer sin ahorcarse.</p>
+</div>
+</aside>
+
+<div class="case-main reveal">
+<p class="role-banner"><span>Rol estratégico</span> Puerta de entrada sin fricción y generador de historial propio</p>
+
+<div class="spec-grid">
+<div class="spec"><p class="spec-l">Monto</p><p class="spec-v">$500 – $6,000</p></div>
+<div class="spec"><p class="spec-l">Plazo</p><p class="spec-v">1 – 3 meses</p></div>
+<div class="spec"><p class="spec-l">Tasa fija anual</p><p class="spec-v">127%</p></div>
+<div class="spec"><p class="spec-l">Comisión de apertura</p><p class="spec-v">Ninguna</p></div>
+<div class="spec"><p class="spec-l">CAT estimado</p><p class="spec-v spec-tbd">TBD</p></div>
+<div class="spec"><p class="spec-l">Presupuesto mensual</p><p class="spec-v">$3,190</p></div>
+<div class="spec"><p class="spec-l">Periodicidad</p><p class="spec-v">Mensual</p></div>
+<div class="spec"><p class="spec-l">Mecanismo de cobro</p><p class="spec-v">Pago por voluntad</p></div>
+<div class="spec"><p class="spec-l">Requisito</p><p class="spec-v">Cuenta CSB</p></div>
+</div>
+
+<div class="matrix-head">
+<p class="table-label">Matriz de pagos</p>
+<p class="matrix-note">El monto máximo lo define el plazo, no la oferta</p>
+</div>
+<div class="matrix">
+<article class="mx mx-1"><p class="mx-h">1 mes</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$3,000</p>
+<p class="mx-p">Pago mensual $3,138</p>
+<div class="meter"><span style="width:98%"></span></div><p class="mx-f">98% de su presupuesto mensual</p></article>
+<article class="mx mx-2"><p class="mx-h">2 meses</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$5,500</p>
+<p class="mx-p">Pago mensual $2,940</p>
+<div class="meter"><span style="width:92%"></span></div><p class="mx-f">92% de su presupuesto mensual</p></article>
+<article class="mx mx-3"><p class="mx-h">3 meses</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$6,000</p>
+<p class="mx-p">Pago mensual $2,186</p>
+<div class="meter"><span style="width:69%"></span></div><p class="mx-f">69% de su presupuesto mensual</p></article>
+</div>
+
+<p class="rule-banner"><span>Regla de originación</span> Arriba de $3,000: mínimo 2 meses &nbsp;·&nbsp; Arriba de $5,500: 3 meses</p>
+<p class="footnote">CAT estimado de 71.2%: deriva de la tasa de 55% anual y, al no haber comisión, no cambia con el monto
+ni el plazo. Presupuesto mensual = 30% de la PMG 2026. Cifras estimadas, sujetas a validación en el modelo.</p>
+</div>
+</div>
+</div>
+
+<!-- CASO DE NEGOCIO · FASE 2 (Slide 9) --------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">04</span>
+<h2>Fase 2 · Cashloan</h2>
+<p>Donde esperamos que viva la mayor rentabilidad del portafolio.</p>
+</div>
+
+<div class="case">
+<aside class="case-aside reveal">
+<div class="case-what">
+<p class="eyebrow eyebrow-light">Qué es</p>
+<p>Crédito de monto mayor con pagos mensuales fijos, cargados directo a la cuenta CSB
+donde recibe su pensión.</p>
+<p>Se liquida entre seis y dieciocho meses, no en cinco años: termina antes que cualquier oferta
+del mercado y le devuelve su capacidad de pago más pronto.</p>
+<p class="case-solve"><span>Resuelve</span> JTBD 3 — el monto grande que no junta de otra forma.
+Aquí decide la mensualidad.</p>
+</div>
+
+<p class="case-limits-label">Por qué estos límites</p>
+<div class="limit limit-floor">
+<p class="limit-tag">Piso $5,000</p>
+<p>El mercado arranca en $6,700. Bajamos el piso porque, por debajo, el Cash Loan Exprés
+resuelve mejor y sin exigir portabilidad.</p>
+</div>
+<div class="limit limit-cap">
+<p class="limit-tag">Techo $40,000</p>
+<p>El mercado llega a $200,000. El nuestro lo pone su capacidad: $2,950 al mes ya es
+el 92% de su presupuesto.</p>
+</div>
+</aside>
+
+<div class="case-main reveal">
+<p class="role-banner"><span>Rol estratégico</span> Donde esperamos que viva la mayor rentabilidad del portafolio</p>
+
+<div class="spec-grid">
+<div class="spec"><p class="spec-l">Monto</p><p class="spec-v">$5,000 – $40,000</p></div>
+<div class="spec"><p class="spec-l">Plazo</p><p class="spec-v">6 – 18 meses</p></div>
+<div class="spec"><p class="spec-l">Tasa fija anual</p><p class="spec-v">69%</p></div>
+<div class="spec"><p class="spec-l">Comisión de apertura</p><p class="spec-v">No aplica</p></div>
+<div class="spec"><p class="spec-l">CAT estimado</p><p class="spec-v spec-tbd">TBD</p></div>
+<div class="spec"><p class="spec-l">Presupuesto mensual</p><p class="spec-v">$3,190</p></div>
+<div class="spec"><p class="spec-l">Periodicidad</p><p class="spec-v">Mensual</p></div>
+<div class="spec"><p class="spec-l">Mecanismo de cobro</p><p class="spec-v">Cargo a cuenta CSB</p></div>
+<div class="spec"><p class="spec-l">Requisito</p><p class="spec-v">Pensión en CSB</p></div>
+</div>
+
+<div class="matrix-head">
+<p class="table-label">Matriz de pagos</p>
+<p class="matrix-note">El monto máximo lo define el plazo, no la oferta</p>
+</div>
+<div class="matrix">
+<article class="mx mx-1"><p class="mx-h">6 meses</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$17,000</p>
+<p class="mx-p">Pago mensual $3,156</p>
+<div class="meter"><span style="width:99%"></span></div><p class="mx-f">99% de su presupuesto mensual</p></article>
+<article class="mx mx-2"><p class="mx-h">12 meses</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$31,000</p>
+<p class="mx-p">Pago mensual $3,145</p>
+<div class="meter"><span style="width:99%"></span></div><p class="mx-f">99% de su presupuesto mensual</p></article>
+<article class="mx mx-3"><p class="mx-h">18 meses</p>
+<p class="mx-l">Monto máximo</p><p class="mx-v">$40,000</p>
+<p class="mx-p">Pago mensual $2,950</p>
+<div class="meter"><span style="width:92%"></span></div><p class="mx-f">92% de su presupuesto mensual</p></article>
+</div>
+
+<p class="rule-banner"><span>Regla de originación</span> Arriba de $17,000: mínimo 12 meses &nbsp;·&nbsp; Arriba de $31,000: 18 meses</p>
+<p class="footnote">CAT estimado entre 50% (18 meses) y 58% (6 meses); queda en la mitad baja de la banda de mercado,
+de 28% a 130%. Presupuesto mensual = 30% de la PMG 2026. Cifras estimadas, sujetas a validación en el modelo.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================
+PESTAÑA 3 · ACTIVIDADES (Fuente: Slides 12, 13 y 14)
+============================================================ -->
+<section class="panel" id="actividades" role="tabpanel" aria-labelledby="actividades" hidden>
+
+<div class="page-head">
+<div class="shell">
+<p class="eyebrow">Pestaña 03</p>
+<h1>Actividades</h1>
+<p class="page-lead">Validación del modelo, aprobación y preparación de la ejecución.</p>
+</div>
+</div>
+
+<!-- WORKFLOW (Slide 12) ------------------------------------ -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">01</span>
+<h2>Cash loans: siguientes pasos</h2>
+<p>Flujo de trabajo en tres bloques, con la aprobación como punto de control.</p>
+</div>
+
+<div class="workflow">
+<div class="wf-col reveal">
+<h3 class="wf-title">Validación del modelo</h3>
+<ol class="wf-list">
+<li><span class="wf-n">1</span><div><p class="wf-h">Validar supuestos</p><p class="wf-d">Con los responsables de las áreas involucradas</p></div></li>
+<li><span class="wf-n">2</span><div><p class="wf-h">Validar rentabilidad</p><p class="wf-d">Rentabilidad por producto y CLV</p></div></li>
+<li><span class="wf-n">3</span><div><p class="wf-h">Definir implementación</p><p class="wf-d">Bankaya, interno o esquema combinado</p></div></li>
+</ol>
+</div>
+
+<div class="wf-gate reveal">
+<span class="wf-gate-n">4</span>
+<p class="wf-gate-t">Obtener aprobación</p>
+<p class="wf-gate-d">Modelo y recursos requeridos</p>
+</div>
+
+<div class="wf-col reveal">
+<h3 class="wf-title">Preparación de la ejecución</h3>
+<ol class="wf-list" start="5">
+<li><span class="wf-n">5</span><div><p class="wf-h">Confirmar equipo</p><p class="wf-d">Responsables, funciones y dedicación</p></div></li>
+<li><span class="wf-n">6</span><div><p class="wf-h">Establecer plan de trabajo</p><p class="wf-d">Sistema de gestión, cadencia y gobernanza</p></div></li>
+<li><span class="wf-n">7</span><div><p class="wf-h">Realizar kick-off</p><p class="wf-d">Inicio formal de la ejecución</p></div></li>
+<li><span class="wf-n">8</span><div><p class="wf-h">Validación con Clientes</p><p class="wf-d">Encuestas</p></div></li>
+</ol>
+</div>
+</div>
+
+<div class="areas reveal">
+<p class="areas-label">Áreas involucradas</p>
+<div class="areas-chips">
+<span>Cobranza</span><span>Riesgo y Normatividad</span><span>Comercial</span>
+<span>Operaciones</span><span>TI</span><span>Legal</span><span>Finanzas</span>
+</div>
+</div>
+</div>
+
+<!-- ALIANZA (Slide 13) ------------------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">02</span>
+<h2>Cash Loans · Alianza Consubanco – Bankaya</h2>
+<p>Qué vimos, dónde estamos y qué sigue en la relación con el socio.</p>
+</div>
+
+<div class="alliance">
+<article class="al-col reveal">
+<header class="al-head"><span class="al-n">1</span><h3>Qué vimos</h3></header>
+<div class="al-item"><svg aria-hidden="true"><use href="#i-pulse"/></svg><p>Explicación general del modelo de riesgo de Bankaya</p></div>
+<div class="al-item"><svg aria-hidden="true"><use href="#i-doc"/></svg><p>Documento que requiere Consubanco para presentar ese modelo ante la CNBV</p></div>
+<div class="al-item"><svg aria-hidden="true"><use href="#i-route"/></svg><p>Mapeo del proceso de portabilidad de nómina</p></div>
+</article>
+
+<article class="al-col al-col-mid reveal">
+<header class="al-head"><span class="al-n">2</span><h3>Dónde estamos</h3></header>
+<div class="al-row"><svg aria-hidden="true"><use href="#i-shield"/></svg>
+<div><p class="al-t">Modelo de riesgo</p><p class="al-d">Bankaya elaborará la documentación del modelo conforme a los requerimientos establecidos por el área de riesgos de CSB</p></div></div>
+<div class="al-row"><svg aria-hidden="true"><use href="#i-box"/></svg>
+<div><p class="al-t">Producto</p><p class="al-d">La portabilidad de nómina es requisito del modelo de cobranza</p></div></div>
+<div class="al-row"><svg aria-hidden="true"><use href="#i-percent"/></svg>
+<div><p class="al-t">Comercial</p><p class="al-d">Propuesta de comisión sobre cobranza, en lugar de originación</p></div></div>
+<div class="al-row"><svg aria-hidden="true"><use href="#i-server"/></svg>
+<div><p class="al-t">Tecnología</p><p class="al-d">Originación y ciclo de vida del crédito quedan en el core de CSB; servicios nuevos por dimensionar</p></div></div>
+<div class="al-row"><svg aria-hidden="true"><use href="#i-legal"/></svg>
+<div><p class="al-t">Legal</p><p class="al-d">Acuerdos de exclusividad, tratamiento de datos y contrato comercial pendientes de cierre</p></div></div>
+</article>
+
+<article class="al-col reveal">
+<header class="al-head"><span class="al-n">3</span><h3>Siguientes pasos</h3></header>
+<ol class="al-timeline">
+<li class="done"><span class="al-chip al-chip-done">5 AGO</span>
+<p>Entrega del documento del modelo de riesgo alineado con la solicitud del área de riesgos de CSB</p></li>
+<li class="done"><span class="al-chip al-chip-done">12 AGO</span>
+<p>Workshop de producto</p></li>
+<li class="wip"><span class="al-chip al-chip-wip">En proceso</span>
+<p>Revisión del modelo de comisión (cobranza) de la alianza</p></li>
+<li class="tbd"><span class="al-chip al-chip-tbd">TBD</span>
+<p>Cierre del acuerdo comercial</p></li>
+</ol>
+</article>
+</div>
+</div>
+
+<!-- SIGUIENTES PASOS (Slide 14) ---------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">03</span>
+<h2>Siguientes pasos</h2>
+<p>Entregables inmediatos y sus responsables.</p>
+</div>
+
+<ol class="next-steps">
+<li class="reveal"><span class="ns-n">1</span>
+<p class="ns-t">Cerrar la definición de producto y el alcance del MVP</p>
+<span class="ns-owner">CSB + Bankaya</span></li>
+<li class="reveal"><span class="ns-n">2</span>
+<p class="ns-t">Definir el nivel de cuenta (N2 o N4)</p>
+<span class="ns-owner">CSB + Bankaya</span></li>
+<li class="reveal"><span class="ns-n">3</span>
+<p class="ns-t">Cerrar los acuerdos legales</p>
+<span class="ns-owner">CSB + Bankaya</span></li>
+</ol>
+</div>
+</section>
+
+<!-- ============================================================
+PESTAÑA 4 · TIMELINE (Fuente: Slides 10 y 11)
+============================================================ -->
+<section class="panel" id="timeline" role="tabpanel" aria-labelledby="timeline" hidden>
+
+<div class="page-head">
+<div class="shell">
+<p class="eyebrow">Pestaña 04</p>
+<h1>Timeline</h1>
+<p class="page-lead">T0 noviembre 2026 · cada producto arranca su prueba cuando el anterior entra a lanzamiento gradual.</p>
+</div>
+</div>
+
+<!-- GANTT (Slide 10) --------------------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">01</span>
+<h2>Cronograma de etapas por producto</h2>
+<p>Fases, hitos y dependencias entre productos.</p>
+</div>
+
+<div class="gantt-legend reveal">
+<span><i class="sw sw-hab"></i>Habilitación</span>
+<span><i class="sw sw-pru"></i>Prueba controlada</span>
+<span><i class="sw sw-lan"></i>Lanzamiento gradual</span>
+<span><i class="sw sw-mas"></i>Masificación</span>
+<span><i class="sw sw-mil"></i>Hito de madurez</span>
+</div>
+
+<div class="gantt-scroll reveal">
+<div class="gantt" id="gantt"><!-- render: script.js --></div>
+</div>
+<p class="gantt-hint">Desliza horizontalmente para ver el cronograma completo en pantallas pequeñas.</p>
+</div>
+
+<!-- FASES (Slide 10, tarjetas inferiores) ------------------ -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">02</span>
+<h2>Fases y criterios de avance</h2>
+<p>Qué entrega cada fase y con qué evidencia avanza a la siguiente.</p>
+</div>
+
+<div class="phase-grid">
+<article class="phase phase-hab reveal">
+<h3>Habilitación <span>4 a 5 meses</span></h3>
+<p>App, modelo de riesgo, contratos, cobro y fondeo listos para el primer crédito.</p>
+<p class="phase-gate"><strong>Avanza con:</strong> Backlog completo y modelo de riesgo v0 aprobado.</p>
+</article>
+<article class="phase phase-pru reveal">
+<h3>Prueba controlada <span>4 a 6 meses</span></h3>
+<p>1,000 clientes con volumen y pérdida topados, para aprender.</p>
+<p class="phase-gate"><strong>Avanza con:</strong> Dos ciclos con mora, conversión y recompra en rango.</p>
+</article>
+<article class="phase phase-lan reveal">
+<h3>Lanzamiento gradual <span>6 meses</span></h3>
+<p>Volumen creciente; se ajustan precio, política y canal.</p>
+<p class="phase-gate"><strong>Avanza con:</strong> Unit economics y operación estables.</p>
+</article>
+<article class="phase phase-mas reveal">
+<h3>Masificación <span>Hasta dic 2031</span></h3>
+<p>Más canales y renovación 100% digital.</p>
+<p class="phase-gate"><strong>Se sostiene con:</strong> Rentabilidad anual arriba de 15.92%.</p>
+</article>
+</div>
+</div>
+
+<!-- SUPUESTOS (Slide 11) ----------------------------------- -->
+<div class="shell">
+<div class="section-head reveal">
+<span class="section-kicker">03</span>
+<h2>Supuestos del proyecto</h2>
+<p>Base de planeación — a validar y cerrar en las sesiones de trabajo antes de firmar.</p>
+</div>
+
+<div class="assump-grid">
+<article class="assump reveal"><span class="as-n">1</span><p>Onboarding y flujos de apertura de Bankaya se usan como están, sin cambios sustanciales.</p></article>
+<article class="assump reveal"><span class="as-n">2</span><p>Otros productos de Bankaya (TAE, pago de servicios, remesas) no se modifican.</p></article>
+<article class="assump reveal"><span class="as-n">3</span><p>El esquema contratado a Atomic/Fresh (Light / Medium / Acelerada con IA) define tamaño y velocidad del equipo; lo paga Consubanco. Acelerado es el cronograma de arriba.</p></article>
+<article class="assump reveal"><span class="as-n">4</span><p>La PUC la desarrolla una célula de Consubanco; Bankaya expone el servicio y CSB lo integra.</p></article>
+<article class="assump reveal"><span class="as-n">5</span><p>Los servicios y variables se diseñan para los 3 productos desde el inicio, no solo el MVP.</p></article>
+<article class="assump reveal assump-wide"><span class="as-n">6</span><p>Cuenta N2 como base (no N4), salvo que la revisión regulatoria lo exija. En caso de requerir N4 desde el inicio, los tiempos pueden cambiar para integrar los nuevos servicios y proveedores para realizar el proceso.</p></article>
+<article class="assump reveal"><span class="as-n">7</span><p>Portabilidad de nómina (CECOBAN / switcheo): requisito duro del modelo de cobranza.</p></article>
+<article class="assump reveal"><span class="as-n">8</span><p>Gran parte del desarrollo vive en Consubanco: core de crédito, nuevos servicios y PUC. Todo el ciclo de vida del producto así como su contabilidad, queda del lado de Consubanco.</p></article>
+<article class="assump reveal"><span class="as-n">9</span><p>Consubanco asigna un Project Manager y un Líder Técnico dedicados al proyecto.</p></article>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="shell footer-inner">
+<p><strong>Cash Loans</strong> · Portal ejecutivo</p>
+<p class="footer-note">Contenido elaborado exclusivamente a partir de la presentación del proyecto Cash Loans.</p>
+</div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Volver al inicio">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5 7 7-1.4 1.4L13 8.8V20h-2V8.8l-4.6 4.6L5 12l7-7Z"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
