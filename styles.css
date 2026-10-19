@@ -6,7 +6,7 @@ styles.css — hoja única, modular y documentada
 01. Tokens de diseño (paleta institucional + tintas)
 02. Reset y base tipográfica
 03. Layout: shell, secciones, encabezados
-04. Header y navegación por pestañas
+04. Masthead institucional y pestañas
 05. Hero y encabezados de pestaña
 06. KPIs
 07. Decisiones pendientes / Alertas y riesgos
@@ -38,6 +38,7 @@ construye a partir de estos cinco colores y de sus tintas.
 /* --- Tintas de Azul Horizonte (protagonistas del sistema) --- */
 --az-10: #F2F7FC;
 --az-15: #ECF3FB;
+--az-20: #E4EEFA;
 --az-25: #DDEAF7;
 --az-40: #CBDEF4;
 --az-60: #B1CDEE;
@@ -55,6 +56,7 @@ construye a partir de estos cinco colores y de sus tintas.
 --alerta: var(--naranja-legado);
 --exito: #00B050; /* color funcional de estado (semáforo) */
 --fondo: var(--az-10);
+--banda: var(--az-20); /* banda del masthead */
 --texto: #1F2937;
 
 --primario-900: #122543;
@@ -74,7 +76,6 @@ construye a partir de estos cinco colores y de sus tintas.
 --texto-3: #7E92AD;
 --texto-inv: #FFFFFF;
 --texto-inv-2:#C7DCF2;
---texto-inv-3:#9FBDE0;
 
 /* Escala de fases del cronograma (claro → oscuro) */
 --fase-hab: var(--az-40);
@@ -127,7 +128,7 @@ table{border-collapse:collapse;width:100%;}
 03. LAYOUT
 ------------------------------------------------------------- */
 .shell{width:min(100% - 40px, var(--shell));margin-inline:auto;}
-.panel{display:none;padding-bottom:80px;background:linear-gradient(180deg,var(--az-25),var(--fondo) 620px);}
+.panel{display:none;padding-bottom:72px;}
 .panel.is-active{display:block;animation:panelIn .45s ease both;}
 @keyframes panelIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
@@ -149,44 +150,48 @@ color:var(--rojo-cercania);margin-bottom:6px;
 .two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
 
 /* -------------------------------------------------------------
-04. HEADER Y PESTAÑAS
+04. MASTHEAD INSTITUCIONAL Y PESTAÑAS
+Filete superior + banda azul clara con identidad, fecha de
+consulta y pestañas tipo píldora. La barra de pestañas queda
+fija al desplazar para que el comité siempre pueda saltar.
 ------------------------------------------------------------- */
-.site-header{
-position:sticky;top:0;z-index:50;
-background:rgba(255,255,255,.92);
-backdrop-filter:saturate(180%) blur(12px);
-border-bottom:1px solid var(--borde);
-transition:box-shadow .25s ease;
-}
-.site-header.is-stuck{box-shadow:var(--sh-1);}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;flex-wrap:wrap;}
+.topbar{height:8px;background:var(--primario);}
 
-.brand{display:flex;align-items:center;gap:12px;padding:12px 0;}
-.brand-mark{
-display:grid;place-items:center;width:40px;height:40px;border-radius:11px;
-background:linear-gradient(135deg,var(--primario),var(--azul-horizonte));
-color:#fff;font-weight:800;font-size:.86rem;letter-spacing:.04em;
-box-shadow:0 6px 16px rgba(27,53,93,.28);
+.masthead{background:var(--banda);}
+.masthead-inner{
+display:flex;align-items:flex-start;justify-content:space-between;
+gap:28px;flex-wrap:wrap;padding:22px 0 6px;
 }
-.brand-text{display:flex;flex-direction:column;line-height:1.15;}
-.brand-text strong{font-size:1.06rem;color:var(--primario);letter-spacing:-.01em;}
-.brand-text small{font-size:.72rem;color:var(--texto-3);letter-spacing:.05em;text-transform:uppercase;}
+.org{
+display:flex;align-items:center;gap:8px;
+font-size:.92rem;font-weight:700;color:var(--primario);letter-spacing:-.005em;
+}
+.org-mark{width:19px;height:19px;color:var(--primario);flex:0 0 auto;}
+.masthead-title{
+font-family:var(--font-display);font-weight:600;color:var(--primario);
+font-size:clamp(1.9rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-top:4px;
+}
+.masthead-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:10px;}
+.meta-line{font-size:.86rem;color:var(--texto-2);text-align:right;}
+.meta-line strong{color:var(--primario);}
+.btn-ghost{
+border:1px solid var(--borde-fuerte);border-radius:999px;background:transparent;
+padding:10px 22px;font-size:.88rem;font-weight:600;color:var(--primario);
+transition:background .2s,border-color .2s;white-space:nowrap;
+}
+.btn-ghost:hover{background:#fff;border-color:var(--azul-horizonte);}
 
-.tabs{position:relative;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;}
+.tabbar{position:sticky;top:0;z-index:50;background:var(--banda);}
+.tabbar.is-stuck{box-shadow:0 2px 10px rgba(27,53,93,.10);}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px 0 14px;}
 .tabs::-webkit-scrollbar{display:none;}
 .tab{
-display:flex;align-items:center;gap:8px;white-space:nowrap;
-padding:12px 16px;border-radius:10px;color:var(--texto-2);
-font-size:.92rem;font-weight:600;transition:color .2s,background .2s;
+white-space:nowrap;padding:10px 20px;border-radius:999px;
+color:var(--secundario);font-size:.95rem;font-weight:600;
+transition:color .2s,background .2s;
 }
-.tab:hover{color:var(--primario);background:var(--superficie-2);}
-.tab.is-active{color:var(--primario);}
-.tab-ico{width:17px;height:17px;fill:currentColor;flex:0 0 auto;opacity:.85;}
-.tab-indicator{
-position:absolute;bottom:0;height:3px;border-radius:3px;
-background:linear-gradient(90deg,var(--secundario),var(--acento));
-transition:transform .32s cubic-bezier(.4,0,.2,1),width .32s cubic-bezier(.4,0,.2,1);
-}
+.tab:hover{color:var(--primario);background:var(--az-40);}
+.tab.is-active{background:var(--azul-horizonte);color:var(--primario);}
 .scroll-progress{height:2px;width:0;background:linear-gradient(90deg,var(--secundario),var(--acento));transition:width .1s linear;}
 
 /* -------------------------------------------------------------
@@ -205,7 +210,7 @@ transform:skewY(-6deg);pointer-events:none;
 }
 .hero-inner{position:relative;z-index:1;}
 .hero .eyebrow{color:var(--acento);}
-.hero h1{
+.hero-title{
 font-family:var(--font-display);color:#fff;font-weight:600;
 font-size:clamp(2.4rem,6vw,4rem);letter-spacing:-.03em;margin-bottom:14px;
 }
@@ -217,16 +222,13 @@ border:1px solid rgba(255,255,255,.26);color:var(--texto-inv-2);
 }
 .chip-solid{background:var(--acento);border-color:var(--acento);color:var(--primario);}
 
-.page-head{
-background:linear-gradient(135deg,var(--primario-900),var(--primario));
-color:#fff;padding:52px 0 56px;
-}
-.page-head .eyebrow{color:var(--acento);}
-.page-head h1{
-font-family:var(--font-display);color:#fff;font-weight:600;
+.page-head{padding:42px 0 0;}
+.page-head + .shell .section-head{margin-top:34px;}
+.page-title{
+font-family:var(--font-display);color:var(--primario);font-weight:600;
 font-size:clamp(2rem,4.4vw,2.9rem);letter-spacing:-.025em;
 }
-.page-lead{color:var(--texto-inv-2);margin-top:10px;max-width:720px;}
+.page-lead{color:var(--texto-2);margin-top:12px;max-width:720px;}
 
 /* -------------------------------------------------------------
 06. KPIs
@@ -341,8 +343,7 @@ content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
 background:linear-gradient(180deg,var(--secundario),var(--acento));
 }
 .scope-card:hover{transform:translateY(-4px);box-shadow:var(--sh-2);border-color:var(--secundario-200);}
-.scope-rank{font-family:var(--font-display);font-size:2.1rem;color:var(--az-60);font-weight:600;line-height:1;}
-.scope-card h3{font-size:1.2rem;margin-top:6px;}
+.scope-card h3{font-size:1.2rem;}
 .scope-role{color:var(--texto-2);font-size:.92rem;margin-top:6px;}
 .scope-date{
 display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:.8rem;font-weight:700;
@@ -782,10 +783,9 @@ background:var(--primario);color:#fff;font-weight:700;font-size:.9rem;
 /* -------------------------------------------------------------
 16. FOOTER, TO-TOP, ANIMACIONES
 ------------------------------------------------------------- */
-.site-footer{background:var(--primario-900);color:var(--texto-inv-2);padding:30px 0;margin-top:40px;}
-.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.84rem;}
+.site-footer{background:var(--primario);color:var(--texto-inv-2);padding:14px 0;margin-top:40px;}
+.footer-inner{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:.82rem;}
 .site-footer strong{color:#fff;}
-.footer-note{color:var(--texto-inv-3);}
 
 .to-top{
 position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;z-index:40;
@@ -816,8 +816,8 @@ opacity:0;visibility:hidden;transform:translateY(8px);transition:all .25s ease;
 .org-transversal{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:980px){
-.header-inner{min-height:0;padding-bottom:6px;}
-.tabs{width:100%;order:3;}
+.masthead-inner{padding-bottom:14px;}
+.masthead-meta{padding-top:0;}
 .two-col,.status-grid,.opp-grid,.case,.org-branches{grid-template-columns:1fr;}
 .workflow{grid-template-columns:1fr;}
 .wf-gate::before{left:50%;top:-26px;transform:translateX(-50%) rotate(90deg);}
@@ -842,24 +842,25 @@ opacity:0;visibility:hidden;transform:translateY(8px);transition:all .25s ease;
 .next-steps li{flex-wrap:wrap;}
 .ns-owner{margin-left:0;}
 .hero{padding:46px 0 56px;}
-.brand-text small{display:none;}
-.tab span{font-size:.86rem;}
+.masthead-meta{width:100%;justify-content:space-between;}
+.meta-line{text-align:left;}
+.tab{font-size:.88rem;padding:9px 16px;}
 .org-transversal{grid-template-columns:1fr;}
 .org-cols{grid-template-columns:1fr;}
 }
 @media (max-width:460px){
 .kpi-grid{grid-template-columns:1fr;}
 .spec-grid{grid-template-columns:1fr;}
-.tab{padding:10px 11px;}
+.tab{padding:9px 14px;font-size:.84rem;}
 }
 
 /* -------------------------------------------------------------
 IMPRESIÓN — para repartir el tablero en comité
 ------------------------------------------------------------- */
 @media print{
-.site-header,.to-top,.gantt-hint{display:none!important;}
+.topbar,.tabbar,.to-top,.gantt-hint,.btn-ghost{display:none!important;}
+.masthead{background:#fff;}
 .panel{display:block!important;page-break-before:always;}
 .reveal{opacity:1!important;transform:none!important;}
 body{background:#fff;}
 }
-
