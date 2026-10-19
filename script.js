@@ -3,14 +3,15 @@ CASH LOANS · PORTAL EJECUTIVO
 script.js — JavaScript puro, sin dependencias
 -------------------------------------------------------------
 Módulos
-01. Navegación por pestañas (hash routing + indicador)
-02. Header pegajoso y barra de progreso
+01. Navegación por pestañas (hash routing)
+02. Barra de pestañas fija y progreso de lectura
 03. Animación de aparición (IntersectionObserver)
 04. Contadores numéricos de KPI
 05. Medidores de la matriz de pagos
 06. Journey del cliente (render desde datos del PPT)
 07. Cronograma Gantt (render desde datos del PPT)
-08. Botón volver arriba
+08. Masthead: fecha de consulta e impresión
+09. Botón volver arriba
 ============================================================= */
 (function () {
 'use strict';
@@ -23,12 +24,14 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 var tabNav = document.getElementById('tabNav');
 var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
 var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
-var indicator = document.getElementById('tabIndicator');
 
-function moveIndicator(btn) {
-if (!indicator || !btn) return;
-indicator.style.width = btn.offsetWidth + 'px';
-indicator.style.transform = 'translateX(' + (btn.offsetLeft - tabNav.scrollLeft) + 'px)';
+/* Mantiene visible la pestaña activa cuando la barra se desplaza en móvil. */
+function revealTab(btn) {
+if (!btn || !tabNav || typeof btn.scrollIntoView !== 'function') return;
+var izq = btn.offsetLeft, der = izq + btn.offsetWidth;
+if (izq < tabNav.scrollLeft || der > tabNav.scrollLeft + tabNav.clientWidth) {
+tabNav.scrollTo({ left: Math.max(0, izq - 16), behavior: reduceMotion ? 'auto' : 'smooth' });
+}
 }
 
 function activate(id, pushHash) {
@@ -39,7 +42,7 @@ tabs.forEach(function (t) {
 var on = t.dataset.tab === id;
 t.classList.toggle('is-active', on);
 t.setAttribute('aria-selected', on ? 'true' : 'false');
-if (on) moveIndicator(t);
+if (on) revealTab(t);
 });
 
 panels.forEach(function (p) {
@@ -63,15 +66,6 @@ tabs.forEach(function (t) {
 t.addEventListener('click', function () { activate(t.dataset.tab, true); });
 });
 
-tabNav.addEventListener('scroll', function () {
-var active = document.querySelector('.tab.is-active');
-moveIndicator(active);
-});
-
-window.addEventListener('resize', function () {
-moveIndicator(document.querySelector('.tab.is-active'));
-});
-
 window.addEventListener('hashchange', function () {
 var id = location.hash.replace('#', '');
 if (id) activate(id, false);
@@ -80,14 +74,21 @@ if (id) activate(id, false);
 /* ===========================================================
 02. HEADER PEGAJOSO + PROGRESO DE LECTURA
 =========================================================== */
-var header = document.getElementById('siteHeader');
+var tabbar = document.querySelector('.tabbar');
+var masthead = document.querySelector('.masthead');
+
+/* El umbral se mide contra el masthead, que no es pegajoso: el
+offsetTop de la propia barra cambia en cuanto queda fija. */
+function umbralFijo() {
+return masthead ? masthead.offsetTop + masthead.offsetHeight : 0;
+}
 var progress = document.getElementById('scrollProgress');
 var toTop = document.getElementById('toTop');
 
 function onScroll() {
 var y = window.scrollY || document.documentElement.scrollTop;
 var max = document.documentElement.scrollHeight - window.innerHeight;
-header.classList.toggle('is-stuck', y > 4);
+if (tabbar) tabbar.classList.toggle('is-stuck', y > umbralFijo());
 if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
 if (toTop) toTop.classList.toggle('is-visible', y > 500);
 sweepReveals(); // red de seguridad ante desplazamientos muy rápidos
@@ -359,7 +360,25 @@ if (host) setTimeout(function () { host.classList.add('is-drawn'); }, 120);
 }
 
 /* ===========================================================
-08. VOLVER ARRIBA
+08. MASTHEAD: FECHA DE CONSULTA E IMPRESIÓN
+=========================================================== */
+function initMasthead() {
+var fecha = document.getElementById('fechaConsulta');
+if (fecha) {
+try {
+fecha.textContent = new Date().toLocaleDateString('es-MX', {
+day: 'numeric', month: 'short', year: 'numeric'
+});
+} catch (e) {
+fecha.textContent = new Date().toLocaleDateString();
+}
+}
+var imprimir = document.getElementById('btnPrint');
+if (imprimir) imprimir.addEventListener('click', function () { window.print(); });
+}
+
+/* ===========================================================
+09. VOLVER ARRIBA
 =========================================================== */
 if (toTop) {
 toTop.addEventListener('click', function () {
@@ -371,13 +390,14 @@ window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
 ARRANQUE
 =========================================================== */
 function init() {
+initMasthead();
 renderJourney();
 
 var initial = location.hash.replace('#', '');
 var valid = tabs.some(function (t) { return t.dataset.tab === initial; });
 activate(valid ? initial : 'tablero', false);
 
-moveIndicator(document.querySelector('.tab.is-active'));
+revealTab(document.querySelector('.tab.is-active'));
 scanReveals();
 runCounters();
 onScroll();
@@ -389,10 +409,4 @@ document.addEventListener('DOMContentLoaded', init);
 init();
 }
 
-// El indicador depende de las fuentes web: recalcula al terminar de cargarlas.
-if (document.fonts && document.fonts.ready) {
-document.fonts.ready.then(function () {
-moveIndicator(document.querySelector('.tab.is-active'));
-});
-}
 })();
